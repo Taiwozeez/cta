@@ -1,21 +1,246 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap');
+
+body {
+  font-family: "Outfit", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.banner {
+  position: relative;
+  width: 100%;
+  height: 400px; 
+  background: url('/cta_img.jpeg') no-repeat center center/cover;
+  background-size: cover; 
+}
+
+.banner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.banner-content {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.banner-content h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.banner-content button {
+  background-color: #1b1b9b;
+  color: #fff;
+  border: 4px solid transparent;
+  padding: 20px 30px;
+  cursor: pointer;
+  border-radius: 50px;
+  position: relative;
+  z-index: 1;
+  font-size: 1.2em;
+  font-weight: bold;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.banner-content button:hover {
+  background-color: #2a2aff; 
+  transform: scale(1.1); 
+  box-shadow: 0px 4px 15px rgba(42, 42, 255, 0.5); 
+}
+
+.banner-content button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+      120deg,
+      #ff6a00,
+      #ff00ff,
+      #00c3ff,
+      #00ff6a,
+      #ffeb00
+  );
+  background-size: 300%;
+  border-radius: 50px;
+  z-index: -1;
+  animation: borderAnimation 2s linear infinite;
+}
+
+.banner-content button:hover::before {
+  animation-play-state: running;
+}
+
+.banner-content button::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background: #1b1b9b;
+  border-radius: 50px;
+  z-index: -1;
+}
+
+@keyframes borderAnimation {
+  0% {
+      transform: translateX(0);
+  }
+  100% {
+      transform: translateX(100%);
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* Shake Animation */
+@keyframes shake {
+  0%, 100% {
+      transform: translateX(0);
+  }
+  25% {
+      transform: translateX(-5px);
+  }
+  50% {
+      transform: translateX(5px);
+  }
+  75% {
+      transform: translateX(-5px);
+  }
+}
+
+.banner-content button.shake {
+  animation: shake 0.3s ease;
+}
+
+/* Floating Objects */
+.floating-object {
+  position: absolute;
+  border-radius: 50%;
+  animation: float 2s ease-in-out infinite;
+  z-index: 0;
+}
+
+.floating-object.left {
+  top: 20%;
+  left: 10%;
+  width: 80px;
+  height: 80px;
+  background-color: #448c3b;
+  animation-delay: 0s;
+}
+
+.floating-object.right {
+  top: 60%;
+  right: 10%;
+  width: 120px;
+  height: 120px;
+  background-color: #1b9aa9;
+  animation-delay: 1s;
+}
+
+.floating-object.middle-1 {
+  top: 40%;
+  left: 30%;
+  width: 100px;
+  height: 100px;
+  background-color: #f39c12;
+  animation-delay: 0.5s;
+}
+
+.floating-object.middle-2 {
+  top: 10%;
+  right: 30%;
+  width: 50px;
+  height: 50px;
+  background-color: #e74c3c;
+  animation-delay: 1.5s;
+}
+
+@keyframes float {
+  0%, 100% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-30px);
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+  .banner {
+      height: 300px; 
+  }
+
+  .banner-content h1 {
+      font-size: 1.5em; 
+  }
+
+  .banner-content button {
+      padding: 15px 25px; 
+      font-size: 1em; 
+  }
+
+  .floating-object.left, .floating-object.right, .floating-object.middle-1, .floating-object.middle-2 {
+      width: 60px; 
+      height: 60px;
+  }
+}
+
+/* For Mobile Phones (screen width <= 768px) */
+@media (max-width: 768px) {
+  .banner {
+      height: 250px; 
+  }
+
+  .banner-content h1 {
+      font-size: 1.2em; 
+  }
+
+  .banner-content button {
+      padding: 12px 20px; 
+      font-size: 0.9em; 
+  }
+
+  .floating-object.left, .floating-object.right, .floating-object.middle-1, .floating-object.middle-2 {
+      width: 50px; 
+      height: 50px;
+  }
+
+  .floating-object.middle-2 {
+      width: 40px; 
+      height: 40px;
+  }
+}
+
+/* For Extra Small Mobile Phones (screen width <= 480px) */
+@media (max-width: 480px) {
+  .banner {
+      height: 200px; 
+  }
+
+  .banner-content h1 {
+      font-size: 1em; 
+  }
+
+  .banner-content button {
+      padding: 10px 15px; 
+      font-size: 0.8em; 
+  }
+
+  .floating-object.left, .floating-object.right, .floating-object.middle-1, .floating-object.middle-2 {
+      width: 40px; 
+      height: 40px;
+  }
 }
